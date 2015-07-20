@@ -234,7 +234,36 @@ describe( 'User profile module', function ()
             </code></pre>
           </section>
           
-          <section></section>
+          <section>
+            <h3>Usa fakes objects</h3>
+          </section>
+
+          <section>
+            <h3>Fake timers</h3>
+            <pre><code data-trim>
+{
+    setUp: function () {
+        this.clock = sinon.useFakeTimers();
+    },
+
+    tearDown: function () {
+        this.clock.restore();
+    },
+
+    "test should animate element over 500ms" : function(){
+        var el = jQuery("<div></div>");
+        el.appendTo(document.body);
+
+        el.animate({ height: "200px", width: "200px" });
+        this.clock.tick(510);
+
+        assertEquals("200px", el.css("height"));
+        assertEquals("200px", el.css("width"));
+    }
+}
+            </code></pre>
+          </section>
+
         </section>
 
 			</div>
